@@ -74,8 +74,8 @@ function FriendsPage() {
     const handleSaveClick = () => {
         console.log('Saving changes:', editedTasks);
         setEditMode(false);
-        axios.post(QUESTIONNAIRE, {editedTasks}, {headers})
-            .then(() => {
+        axios.post(QUESTIONNAIRE, editedTasks, {headers})
+          /*  .then(() => {
                 axios.get(QUESTIONNAIRE, { headers })
                     .then(response => {
                         setTasks(response.data);
@@ -84,7 +84,7 @@ function FriendsPage() {
                     .catch(error => {
                         console.error('Error fetching friends data:', error);
                     });
-            })
+            })*/
             .catch(error => {
                 console.error('Error fetching user data:', error);
             });
