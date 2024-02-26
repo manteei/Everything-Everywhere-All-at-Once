@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.MuiTypography-root,
+.MuiButtonBase-root,
+.MuiInputBase-root,
+.MuiFormLabel-root,
+.MuiFormHelperText-root,
+.MuiTableCell-root{
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.MuiButtonBase-root{
+  box-shadow: none !important;
+}
