@@ -22,6 +22,7 @@ export default function appReducer(state = DEFAULT_STATE, {type, payload}) {
                 style
             })
             localStorage.setItem("token", payload.accessToken)
+            localStorage.setItem("role", payload.role )
             return {
                 ...state,
                 isRedirect: true

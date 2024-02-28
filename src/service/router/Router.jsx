@@ -8,6 +8,7 @@ import People from "../../scene/main/People";
 import Requests from "../../scene/main/Request";
 import Tasks from "../../scene/main/Tasks";
 import Questionnaire from "../../scene/main/Questionnaire";
+import TechnicalSpecialist from "../../scene/main/TechnicalSpecialist";
 function Router() {
     return (
         <BrowserRouter >
@@ -17,6 +18,7 @@ function Router() {
                 <Route path="/profile/myFriends" element={<Friends/>}/>
                 <Route path="/profile/allPerson" element={<People/>}/>
                 <Route path="/profile/moving/task" element={<Tasks/>}/>
+                <Route path="/work/tasks" element={<TechnicalSpecialist/>}/>
                 <Route path="/profile/questionnaire" element={<Questionnaire/>}/>
                 <Route path="/profile/requests" element={<Requests/>}/>
                 <Route path="/profile" element={<Profile/>}/>

@@ -75,7 +75,7 @@ function FriendsPage() {
         console.log('Saving changes:', editedTasks);
         setEditMode(false);
         axios.post(QUESTIONNAIRE, editedTasks, {headers})
-          /*  .then(() => {
+           .then(() => {
                 axios.get(QUESTIONNAIRE, { headers })
                     .then(response => {
                         setTasks(response.data);
@@ -84,15 +84,22 @@ function FriendsPage() {
                     .catch(error => {
                         console.error('Error fetching friends data:', error);
                     });
-            })*/
+            })
             .catch(error => {
                 console.error('Error fetching user data:', error);
             });
     };
 
     const handleMasteryChange = (index, event) => {
+        const inputValue = parseInt(event.target.value) || 0;
         const newEditedTasks = [...editedTasks];
-        newEditedTasks[index].mastery_percentage = parseInt(event.target.value) || 0;
+        // Проверяем, входит ли введенное значение в диапазон от 0 до 100
+        if (inputValue >= 0 && inputValue <= 100) {
+            newEditedTasks[index].mastery_percentage = inputValue;
+        } else {
+            // Если введенное значение выходит за пределы диапазона, устанавливаем значение по умолчанию
+            newEditedTasks[index].mastery_percentage = 0;
+        }
         setEditedTasks(newEditedTasks);
     };
 

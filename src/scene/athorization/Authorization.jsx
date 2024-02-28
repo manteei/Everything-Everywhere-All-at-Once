@@ -47,13 +47,21 @@ function Authorization(props) {
 
     useEffect(() => {
         if (localStorage.getItem("token") !== null) {
-            navigate("/profile")
+            if (localStorage.getItem("role") === "Герой"){
+                navigate("/profile")
+            } else if(localStorage.getItem("role") === "Технический_специалист"){
+                navigate("/work/tasks")
+            }
         }
     }, [])
 
     useEffect(() => {
         if (props.isRedirect) {
-            navigate("/profile")
+            if (localStorage.getItem("role") === "Герой"){
+                navigate("/profile")
+            } else if(localStorage.getItem("role") === "Технический_специалист"){
+                navigate("/work/tasks")
+            }
             localStorage.setItem("user", login)
             props.offRedirect()
         }
