@@ -8,7 +8,11 @@ import People from "../../scene/main/People";
 import Requests from "../../scene/main/Request";
 import Tasks from "../../scene/main/Tasks";
 import Questionnaire from "../../scene/main/Questionnaire";
-import TechnicalSpecialist from "../../scene/main/TechnicalSpecialist";
+import TechnicalSpecialist from "../../scene/main/TechnicalTasks";
+import TechnicalMain from "../../scene/main/TechnicalMain";
+import Orders from "../../scene/main/TechnicalOrders";
+import OrderBoard from "../../scene/main/OrderBoard";
+import TechnicalIncidents from "../../scene/main/TechnicalIncidents";
 function Router() {
     return (
         <BrowserRouter >
@@ -18,7 +22,11 @@ function Router() {
                 <Route path="/profile/myFriends" element={<Friends/>}/>
                 <Route path="/profile/allPerson" element={<People/>}/>
                 <Route path="/profile/moving/task" element={<Tasks/>}/>
+                <Route path="/profile/incidents" element={<OrderBoard/>}/>
+                <Route path="/work/incidents/addIncidents" element={<TechnicalIncidents/>}/>
                 <Route path="/work/tasks" element={<TechnicalSpecialist/>}/>
+                <Route path="/work" element={<TechnicalMain/>}/>
+                <Route path="/work/incidents" element={<Orders/>}/>
                 <Route path="/profile/questionnaire" element={<Questionnaire/>}/>
                 <Route path="/profile/requests" element={<Requests/>}/>
                 <Route path="/profile" element={<Profile/>}/>

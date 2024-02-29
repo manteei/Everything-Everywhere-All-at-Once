@@ -50,7 +50,7 @@ function Authorization(props) {
             if (localStorage.getItem("role") === "Герой"){
                 navigate("/profile")
             } else if(localStorage.getItem("role") === "Технический_специалист"){
-                navigate("/work/tasks")
+                navigate("/work")
             }
         }
     }, [])
@@ -60,7 +60,7 @@ function Authorization(props) {
             if (localStorage.getItem("role") === "Герой"){
                 navigate("/profile")
             } else if(localStorage.getItem("role") === "Технический_специалист"){
-                navigate("/work/tasks")
+                navigate("/work")
             }
             localStorage.setItem("user", login)
             props.offRedirect()

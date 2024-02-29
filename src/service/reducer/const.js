@@ -4,10 +4,15 @@ export const TABLE = API + "/table"
 export const AUTH = USER + "/auth"
 export const REG = USER + "/reg"
 
-export const WORK = "/work"
+export const WORK = API +  "/work"
 export const TECHNICAL_TASKS = WORK + "/tasks"
 
 export const PROF = API + "/profile"
+
+export const INC = PROF + "/incidents"
+
+export const TECH_INC = WORK + "/incidents"
+export const ADD_INC = TECH_INC + "/addIncidents"
 
 export const MY_FRIENDS = PROF + "/myFriends"
 

@@ -76,11 +76,15 @@ function Profile() {
     };
 
     const handleNavigateToFriends = () => {
-        window.location.href = '/profile/myFriends'; // Перенаправление на страницу друзей
+        window.location.href = '/profile/myFriends';
     };
     const handleExit = () => {
         localStorage.removeItem('token');
         window.location.href = '/login';
+    };
+
+    const handleNavigateToOrders = () => {
+        window.location.href = '/profile/incidents';
     };
     const handleGetTask = () => {
         window.location.href = '/profile/moving/task';
@@ -154,7 +158,7 @@ function Profile() {
                     </Button>
                 </div>
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
-                    <Button onClick={handleNavigateToFriends} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                    <Button onClick={handleNavigateToOrders} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         К доске заказов
                     </Button>
                 </div>

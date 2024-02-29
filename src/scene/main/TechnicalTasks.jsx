@@ -152,6 +152,9 @@ function FriendsPage() {
                     </ListItem>
                 ))}
             </List>
+            <Button component={Link} to="/work" className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                Вернуться к профилю
+            </Button>
 
         </div>
     );
