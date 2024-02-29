@@ -44,18 +44,21 @@ const useStyles = makeStyles({
 function FriendsPage() {
     const classes = useStyles();
     const [tasks, setTasks] = useState([]);
-
-    const [showInput, setShowInput] = useState(false);
-    const [coordinatorName, setCoordinatorName] = useState('');
+    const [selectedTaskId, setSelectedTaskId] = useState(null);
+    const [coordinatorNames, setCoordinatorNames] = useState({});
+    const [taskTaken, setTaskTaken] = useState({});
+    const [showInput, setShowInput] = useState(false); // Состояние для отображения поля ввода
 
     const token = localStorage.getItem('token');
     const headers = {
         Authorization: `Bearer ${token}`,
     };
+
     useEffect(() => {
         if (!token) {
             window.location.href = '/login';
-        }}, []);
+        }
+    }, [token]);
 
     useEffect(() => {
         axios.get(INC, { headers })
@@ -66,25 +69,32 @@ function FriendsPage() {
                 console.error('Error fetching friends data:', error);
             });
     }, []);
-    const handleInputChange = (event) => {
-        setCoordinatorName(event.target.value);
+
+    const handleInputChange = (event, taskId) => {
+        const { value } = event.target;
+        setCoordinatorNames(prevState => ({
+            ...prevState,
+            [taskId]: value
+        }));
     };
 
-    const handleSubmit = (id) => {
-        const token = localStorage.getItem('token');
-        const headers = {
-            Authorization: `Bearer ${token}`,
-        };
-        axios.post(INC, {id: id , name: coordinatorName }, { headers })
+    const handleSubmit = (id, name) => {
+        axios.post(INC, { id, name }, { headers })
             .then(response => {
-
+                setTaskTaken(prevState => ({
+                    ...prevState,
+                    [id]: true
+                }));
+                setShowInput(false); // После отправки формы скрываем поле ввода
             })
             .catch(error => {
                 console.error('Error updating user data:', error);
             });
     };
-    const chooseOrder = () => {
-        setShowInput(true);
+
+    const chooseOrder = (taskId) => {
+        setSelectedTaskId(taskId);
+        setShowInput(true); // Показываем поле ввода при выборе задания
     };
 
     return (
@@ -92,38 +102,31 @@ function FriendsPage() {
             Доступные заказы:
             <List>
                 {tasks.map(task => (
-                    <ListItem key={task.name} className={classes.listItem} style={{ marginRight: '40px' }}>
-                        Монстр:
-                        <ListItemText primary={task.name} style={{ marginRight: '40px', alignItems: 'center' }} />
-                         id:
-                        <ListItemText primary={task.id} style={{ marginRight: '40px', alignItems: 'center' }} />
-                         уровень:
-                        <ListItemText primary={task.level} style={{ marginRight: '40px', alignItems: 'center' }} />
-                         цена:
-                        <ListItemText primary={task.price} style={{ marginRight: '40px', alignItems: 'center' }} />
-
-
-                            <Button onClick={chooseOrder}  variant="outlined">
+                    <ListItem key={task.id} className={classes.listItem} style={{ marginRight: '40px' }}>
+                        Монстр: <ListItemText primary={task.name} style={{ marginRight: '40px', alignItems: 'center' }} />
+                        id: <ListItemText primary={task.id} style={{ marginRight: '40px', alignItems: 'center' }} />
+                        уровень: <ListItemText primary={task.level} style={{ marginRight: '40px', alignItems: 'center' }} />
+                        цена: <ListItemText primary={task.price} style={{ marginRight: '40px', alignItems: 'center' }} />
+                        {showInput && selectedTaskId === task.id ? (
+                            <div>
+                                <TextField
+                                    label="Введите имя координатора"
+                                    value={coordinatorNames[task.id] || ''}
+                                    onChange={(event) => handleInputChange(event, task.id)}
+                                />
+                                <Button onClick={() => handleSubmit(task.id, coordinatorNames[task.id])} variant="outlined">
+                                    Сохранить
+                                </Button>
+                            </div>
+                        ) : (
+                            <Button onClick={() => chooseOrder(task.id)} variant="outlined" disabled={taskTaken[task.id]}>
                                 <AddIcon style={{ marginRight: '20px' }} />
-                                Взять задание
+                                {taskTaken[task.id] ? 'Задание взято' : 'Взять задание'}
                             </Button>
-                            {showInput && (
-                                <div>
-                                    <TextField
-                                        label="Введите имя координатора"
-                                        value={coordinatorName}
-                                        onChange={handleInputChange}
-                                    />
-                                    <Button onClick={handleSubmit(task.id)} variant="outlined">
-                                        Сохранить
-                                    </Button>
-                                </div>
-                            )}
-
+                        )}
                     </ListItem>
                 ))}
             </List>
-
             <Button component={Link} to="/profile" className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                 Вернуться к профилю
             </Button>
