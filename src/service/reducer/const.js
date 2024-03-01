@@ -9,6 +9,9 @@ export const TECHNICAL_TASKS = WORK + "/tasks"
 
 export const PROF = API + "/profile"
 
+export const MESSAGES= PROF + "/messages"
+
+export const HISTORY = PROF + "/sendMessages"
 export const INC = PROF + "/incidents"
 
 export const TECH_INC = WORK + "/incidents"

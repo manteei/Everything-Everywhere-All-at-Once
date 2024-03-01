@@ -90,7 +90,7 @@ function Profile() {
         window.location.href = '/profile/moving/task';
     };
     const handleNavigateToQuestionnaire = () =>{
-        window.location.href = 'profile/questionnaire'
+        window.location.href = '/profile/questionnaire'
     };
     const handleSaveClick = () => {
         const token = localStorage.getItem('token');
@@ -164,16 +164,21 @@ function Profile() {
                         К доске заказов
                     </Button>
                 </div>
+                {localStorage.getItem('role') === "Герой" ?(
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
                     <Button onClick={handleGetTask} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         Получить задание
                     </Button>
                 </div>
+                ):null}
+                    {localStorage.getItem('role') === "Герой" ?(
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
                     <Button onClick={handleNavigateToQuestionnaire} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         К анкете
                     </Button>
                 </div>
+                    ):null}
+
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
                     <Button onClick={handleExit} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         Выход

@@ -82,8 +82,9 @@ function FriendsPage() {
             });
     };
 
-    const handleMessageFriend = (friendId) => {
-        // Обработка отправки сообщения другу
+    const handleMessageFriend = (friendName) => {
+        localStorage.setItem('selectedFriend', friendName);
+        window.location.href = '/profile/messages';
     };
 
     return (
