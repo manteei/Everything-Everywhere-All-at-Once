@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import {ALL_PERSON, INC, MY_FRIENDS, PROF, RESULT, TASKS} from '../../service/reducer/const';
-import { Typography, List, ListItem, ListItemText, Button } from '@mui/material';
+import {Typography, List, ListItem, ListItemText, Button, Select, MenuItem} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import MessageIcon from "@mui/icons-material/Message";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -49,10 +49,23 @@ function FriendsPage() {
     const [taskTaken, setTaskTaken] = useState({});
     const [showInput, setShowInput] = useState(false); // Состояние для отображения поля ввода
 
+    const [selectedCoordinator, setSelectedCoordinator] = useState('');
+
+    const [coordinators, setCoordinators] = useState([]);
     const token = localStorage.getItem('token');
     const headers = {
         Authorization: `Bearer ${token}`,
     };
+
+    useEffect(() => {
+        axios.get(ALL_PERSON, { headers })
+            .then(response => {
+                setCoordinators(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching friends data:', error);
+            });
+    }, []);
 
     useEffect(() => {
         if (!token) {
@@ -77,6 +90,11 @@ function FriendsPage() {
             [taskId]: value
         }));
     };
+
+    const handleSelectChange = (event) => {
+        setSelectedCoordinator(event.target.value);
+    };
+
 
     const handleSubmit = (id, name) => {
         axios.post(INC, { id, name }, { headers })
@@ -108,12 +126,17 @@ function FriendsPage() {
                         уровень: <ListItemText primary={task.level} style={{ marginRight: '40px', alignItems: 'center' }} />
                         цена: <ListItemText primary={task.price} style={{ marginRight: '40px', alignItems: 'center' }} />
                         {showInput && selectedTaskId === task.id ? (
-                            <div>
-                                <TextField
-                                    label="Введите имя координатора"
-                                    value={coordinatorNames[task.id] || ''}
-                                    onChange={(event) => handleInputChange(event, task.id)}
-                                />
+                            <div><Select
+                                value={selectedCoordinator}
+                                onChange={(event) => handleInputChange(event, task.id)}
+                            >
+                                <MenuItem value="" disabled>
+                                    Выберите имя координатора
+                                </MenuItem>
+                                {coordinators.map((coordinator, index) => (
+                                    <MenuItem key={index} value={coordinator.friend}>{coordinator.friend}</MenuItem>
+                                ))}
+                            </Select>
                                 <Button onClick={() => handleSubmit(task.id, coordinatorNames[task.id])} variant="outlined">
                                     Сохранить
                                 </Button>
