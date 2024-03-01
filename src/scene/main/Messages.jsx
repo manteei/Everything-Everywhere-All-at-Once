@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import {MESSAGES} from "../../service/reducer/const";
+import {HISTORY, MESSAGES, REQ, SEND} from "../../service/reducer/const";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 
 const useStyles = makeStyles({
     messageContainer: {
@@ -12,20 +14,32 @@ const useStyles = makeStyles({
         borderRadius: '8px',
         textAlign: 'right'
     },
-    pinkMessage: {
+    blueMessage: {
         backgroundColor: 'lightpink',
         borderRadius: '20px',
     },
-    blueMessage: {
+    pinkMessage: {
         border: '2px solid pink',
         borderRadius: '20px',
         marginBottom: '10px',
         textAlign: 'left',
     },
+    textField : {
+        border: '2px solid pink',
+        borderRadius: '20px',
+        width: "400px"
+    }
 });
 const MessageHistory = ({ name }) => {
     const classes = useStyles();
     const [messages, setMessages] = useState([]);
+    const [message, setMessage] = useState('');
+    const myName = localStorage.getItem('user')
+
+    const handleMessageChange = (event) => {
+        setMessage(event.target.value);
+    };
+
     const selectedFriend = localStorage.getItem('selectedFriend');
     const token = localStorage.getItem('token');
     const headers = {
@@ -42,13 +56,36 @@ const MessageHistory = ({ name }) => {
             });
     }, [name]);
 
+    const handleSubmitMessage = (name) => {
+        const token = localStorage.getItem('token');
+        const headers = {
+            Authorization: `Bearer ${token}`,
+        };
+
+        setMessage("")
+
+        axios.post(SEND, { name: selectedFriend, text: message}, { headers})
+            .then(() => {
+                axios.post(MESSAGES, {  name : selectedFriend }, { headers})
+                    .then(response => {
+                        setMessages(response.data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching message history:', error);
+                    });
+            })
+            .catch(error => {
+                console.error('Error updating user data:', error);
+            });
+    };
+
     return (
         <div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <h2>{selectedFriend}</h2>
             </div>
             {messages.map((message, index) => (
-                <div key={index} className={`${classes.messageContainer} ${message.name === localStorage.getItem('user') ? classes.blueMessage : classes.pinkMessage}`}>
+                <div key={index} className={`${classes.messageContainer} ${message.name === myName ? classes.blueMessage : classes.pinkMessage}`}>
                     <div>
                         {message.content}
                     </div>
@@ -57,7 +94,19 @@ const MessageHistory = ({ name }) => {
                     </div>
                 </div>
             ))}
+            <div className = {classes.messageContainer}>
+            <TextField className ={classes.textField}
+                label="Введите сообщение"
+                variant="outlined"
+                value={message}
+                onChange={handleMessageChange}
+            />
+            <Button variant="outlined" onClick={handleSubmitMessage}>
+                Отправить
+            </Button>
+            </div>
         </div>
+
     );
 }
 
