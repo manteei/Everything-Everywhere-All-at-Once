@@ -57,7 +57,7 @@ function Authorization(props) {
 
     useEffect(() => {
         if (props.isRedirect) {
-            if (localStorage.getItem("role") === "Герой"){
+            if ((localStorage.getItem("role") === "Герой") || (localStorage.getItem("role") === "Координатор")){
                 navigate("/profile")
             } else if(localStorage.getItem("role") === "Технический_специалист"){
                 navigate("/work")

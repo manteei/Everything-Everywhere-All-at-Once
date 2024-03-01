@@ -133,7 +133,9 @@ function Profile() {
                     }
                     </Typography>
                     <Typography className={classes.userInfo}>Друзья: {userData.countFriends}</Typography>
+                        {localStorage.getItem('role') === "Герой" ?(
                     <Typography className={classes.userInfo}>Скилл: {userData.skill}</Typography>
+                        ):null}
                     </div>
                     <div>{!editMode && (
                         <IconButton onClick={handleEditClick}>

@@ -48,7 +48,7 @@ function FriendsPage() {
     const [coordinatorNames, setCoordinatorNames] = useState({});
     const [taskTaken, setTaskTaken] = useState({});
     const [showInput, setShowInput] = useState(false); // Состояние для отображения поля ввода
-
+    const [coordinates, setCoordinates] = useState(null);
     const [selectedCoordinator, setSelectedCoordinator] = useState('');
 
     const [coordinators, setCoordinators] = useState([]);
@@ -77,6 +77,7 @@ function FriendsPage() {
         axios.get(INC, { headers })
             .then(response => {
                 setTasks(response.data);
+
             })
             .catch(error => {
                 console.error('Error fetching friends data:', error);
@@ -103,7 +104,9 @@ function FriendsPage() {
                     ...prevState,
                     [id]: true
                 }));
+
                 setShowInput(false); // После отправки формы скрываем поле ввода
+                setCoordinates(response.data);
             })
             .catch(error => {
                 console.error('Error updating user data:', error);
@@ -117,6 +120,24 @@ function FriendsPage() {
 
     return (
         <div className={classes.friendsContainer}>
+            {coordinates && (
+                <div>
+                <div>Информация о координатах вашего монстра</div>
+                <div className={classes.listItem} style={{ marginBottom: '40px', alignItems: 'center' }}>
+                    <ul>
+                        {coordinates.map(coord => (
+                            <li key={coord.name}>
+                                <p>Название галактики: {coord.name}</p>
+                                <p>Долгота: {coord.longitude}</p>
+                                <p>Широта: {coord.latitude}</p>
+                                <p>Координата Y: {coord.coordinatey}</p>
+                                <p>Координата X: {coord.coordinatex}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                </div>
+            )}
             Доступные заказы:
             <List>
                 {tasks.map(task => (
@@ -142,10 +163,12 @@ function FriendsPage() {
                                 </Button>
                             </div>
                         ) : (
+                            localStorage.getItem('role') === "Герой" && (
                             <Button onClick={() => chooseOrder(task.id)} variant="outlined" disabled={taskTaken[task.id]}>
                                 <AddIcon style={{ marginRight: '20px' }} />
                                 {taskTaken[task.id] ? 'Задание взято' : 'Взять задание'}
                             </Button>
+                                )
                         )}
                     </ListItem>
                 ))}
