@@ -44,6 +44,7 @@ const useStyles = makeStyles({
 function FriendsPage() {
     const classes = useStyles();
     const [tasks, setTasks] = useState([]);
+    const [taskTaken, setTaskTaken] = useState({});
 
     useEffect(() => {
         axios.get(TECH_INC, { headers })
@@ -64,7 +65,33 @@ function FriendsPage() {
             window.location.href = '/login';
         }}, []);
 
+    const orderDone = (id) => {
+        axios.post(TECH_INC, { id, name: "Done" }, { headers })
+            .then(response => {
+                setTaskTaken(prevState => ({
+                    ...prevState,
+                    [id]: true
+                }));
 
+            })
+            .catch(error => {
+                console.error('Error updating user data:', error);
+            });
+    }
+
+
+const orderNotDone = (id) => {
+    axios.post(TECH_INC, { id, name: "NotDone" }, { headers })
+        .then(response => {
+            setTaskTaken(prevState => ({
+                ...prevState,
+                [id]: true
+            }));
+        })
+        .catch(error => {
+            console.error('Error updating user data:', error);
+        });
+};
 
     return (
         <div className={classes.friendsContainer}>
@@ -78,6 +105,12 @@ function FriendsPage() {
                         <ListItemText primary={task.hero} style={{ marginRight: '40px', alignItems: 'center' }} />
                         координатор:
                         <ListItemText primary={task.coordinator} style={{ marginRight: '40px', alignItems: 'center' }} />
+                        <Button onClick={() => orderDone(task.order_id)} variant="outlined" style={{ marginRight: '20px' }} disabled={taskTaken[task.order_id]} >
+                            Выполнен!
+                        </Button>
+                        <Button onClick={() => orderNotDone(task.order_id)} variant="outlined" disabled={taskTaken[task.order_id]}>
+                            Не выполнен :(
+                        </Button>
                     </ListItem>
                 ))}
             </List>
