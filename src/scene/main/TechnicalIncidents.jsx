@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
-import {ADD_INC} from '../../service/reducer/const';
-import {Button} from '@mui/material';
+import {ADD_INC, ALL_PERSON, MONSTERS, UNIVERSALS} from '../../service/reducer/const';
+import {Button, MenuItem, Select} from '@mui/material';
 import TextField from "@mui/material/TextField";
 
 const useStyles = makeStyles({
@@ -45,6 +45,8 @@ function FriendsPage() {
     const [universe, setUniverse] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+    const [monsters, setMonsters] = useState([]);
+    const [universals, setUniversals] = useState([]);
 
 
     const token = localStorage.getItem('token');
@@ -55,6 +57,26 @@ function FriendsPage() {
         if (!token) {
             window.location.href = '/login';
         }}, []);
+
+    useEffect(() => {
+        axios.get(MONSTERS, { headers })
+            .then(response => {
+                setMonsters(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching friends data:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.get(UNIVERSALS, { headers })
+            .then(response => {
+                setUniversals(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching friends data:', error);
+            });
+    }, []);
 
     const handleSubmit = () => {
         axios.post(ADD_INC, { monster: monster, nameUniversal : universe, longitude : longitude, latitude :  latitude}, { headers })
@@ -73,18 +95,32 @@ function FriendsPage() {
            Добавить инцидент:
             <div>
                     <div>
-                        <TextField
+                        <Select
                             label="Монстр"
                             value={monster}
                             onChange={(e) => setMonster(e.target.value)}
-                            style={{marginRight: "20px",  marginTop: "20px"}}
-                        />
-                        <TextField
+                            style={{marginRight: "20px",  marginTop: "20px",  width: "200px"}}
+                        >
+                            <MenuItem value="" disabled>
+                                Выберите тип монстра
+                            </MenuItem>
+                            {monsters.map((monsters, index) => (
+                                <MenuItem key={index} value={monsters.name}>{monsters.name}</MenuItem>
+                            ))}
+                        </Select>
+                        <Select
                             label="Вселенная"
                             value={universe}
                             onChange={(e) => setUniverse(e.target.value)}
-                            style={{marginRight: "20px",  marginTop: "20px"}}
-                        />
+                            style={{marginRight: "20px",  marginTop: "20px",  width: "200px"}}
+                        >
+                            <MenuItem value="" disabled>
+                                Выберите название вселенной
+                            </MenuItem>
+                            {universals.map((universals, index) => (
+                                <MenuItem key={index} value={universals.name}>{universals.name}</MenuItem>
+                            ))}
+                        </Select>
                         <TextField
                             label="Широта"
                             value={latitude}

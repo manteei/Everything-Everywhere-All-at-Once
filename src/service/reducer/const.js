@@ -12,6 +12,9 @@ export const PROF = API + "/profile"
 export const INC = PROF + "/incidents"
 
 export const TECH_INC = WORK + "/incidents"
+
+export const MONSTERS = TECH_INC + "/monsters"
+export const UNIVERSALS = TECH_INC + "/universals"
 export const ADD_INC = TECH_INC + "/addIncidents"
 
 export const MY_FRIENDS = PROF + "/myFriends"
