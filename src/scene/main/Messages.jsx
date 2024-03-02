@@ -4,6 +4,7 @@ import axios from 'axios';
 import {HISTORY, MESSAGES, REQ, SEND} from "../../service/reducer/const";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     messageContainer: {
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
         border: '2px solid pink',
         borderRadius: '20px',
         width: "400px"
-    }
+    },
 });
 const MessageHistory = ({ name }) => {
     const classes = useStyles();
@@ -95,16 +96,25 @@ const MessageHistory = ({ name }) => {
                 </div>
             ))}
             <div className = {classes.messageContainer}>
-            <TextField className ={classes.textField}
+            <TextField
+                className ={classes.textField}
                 label="Введите сообщение"
                 variant="outlined"
                 value={message}
                 onChange={handleMessageChange}
+                style = {{ borderRadius: '20px'}}
             />
-            <Button variant="outlined" onClick={handleSubmitMessage}>
+            <Button variant="outlined" onClick={handleSubmitMessage} style = {{marginTop: '15px'}}>
                 Отправить
             </Button>
+                <Button component={Link} to="/profile"  style={{ width: 200, padding: 8, display: 'block', margin: '0 auto' }}>
+                    Вернуться к профилю
+                </Button>
+                <Button component={Link} to="/profile/myFriends"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', }}>
+                    Вернуться к друзьям
+                </Button>
             </div>
+
         </div>
 
     );

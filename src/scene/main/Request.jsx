@@ -6,6 +6,7 @@ import {ALL_PERSON, MY_FRIENDS, REQ} from '../../service/reducer/const';
 import { Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import DeleteIcon from "@mui/icons-material/Delete";
 import MessageIcon from "@mui/icons-material/Message";
+import AddIcon from "@mui/icons-material/Add";
 
 const useStyles = makeStyles({
     friendsContainer: {
@@ -98,7 +99,7 @@ function FriendsPage() {
                         <ListItemText primary={friend.friend} style={{ marginRight: '40px' }}/>
                         <div className={classes.buttonGroup}>
                             <Button onClick={() => handleAddRequest(friend.friend)} variant="outlined"  disabled={requestFriends[friend.friend]}>
-                                <DeleteIcon style={{ marginRight: '20px' }} />
+                                <AddIcon style={{ marginRight: '20px' }} />
                                 {requestFriends[friend.friend] ?  'Заявка принята':'Принять заявку'}
                             </Button>
                             <Button onClick={() => handleMessageFriend(friend.friend)} variant="outlined">
