@@ -111,7 +111,10 @@ const MessageHistory = ({ name }) => {
                     Вернуться к профилю
                 </Button>
                 <Button component={Link} to="/profile/myFriends"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', }}>
-                    Вернуться к друзьям
+                    К друзьям
+                </Button>
+                <Button component={Link} to="/profile/dialogs"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', }}>
+                    К диалогам
                 </Button>
             </div>
 

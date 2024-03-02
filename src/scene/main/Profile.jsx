@@ -92,6 +92,10 @@ function Profile() {
     const handleNavigateToQuestionnaire = () =>{
         window.location.href = '/profile/questionnaire'
     };
+
+    const handleMessages = () =>{
+        window.location.href = '/profile/dialogs'
+    };
     const handleSaveClick = () => {
         const token = localStorage.getItem('token');
         const headers = {
@@ -182,6 +186,11 @@ function Profile() {
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
                     <Button onClick={handleExit} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         Выход
+                    </Button>
+                </div>
+                <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
+                    <Button onClick={handleMessages} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                        К сообщениям
                     </Button>
                 </div>
             </div>
