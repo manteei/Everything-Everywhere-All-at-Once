@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         alignItems: 'center',
         paddingTop: '48px',
-        width: '450px',
+        width: '500px',
         margin: '0 auto',
     },
     listItem: {
@@ -164,7 +164,7 @@ function FriendsPage() {
                             </div>
                         ) : (
                             localStorage.getItem('role') === "Герой" && (
-                            <Button onClick={() => chooseOrder(task.id)} variant="outlined" disabled={taskTaken[task.id]}>
+                            <Button onClick={() => chooseOrder(task.id)} variant="outlined" disabled={taskTaken[task.id]} style = {{width:'200px'}}>
                                 <AddIcon style={{ marginRight: '20px' }} />
                                 {taskTaken[task.id] ? 'Задание взято' : 'Взять задание'}
                             </Button>

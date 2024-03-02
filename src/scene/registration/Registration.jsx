@@ -156,7 +156,7 @@ function Registration(props) {
 
 
                         <div style={{display: "flex", justifyContent: "flex-end", marginTop: 32}}>
-                            <CustomButton w={200} disabled={checkRegistration(login, password, repeatPassword)}
+                            <CustomButton w={200} disabled={checkRegistration(login, password, repeatPassword, role, secretCode)}
                                           action={handleRegistration} p={8} title={props.fetchingReg ?
                                 <CircularProgress style={{color: "pink", width: 20, height: 20}}/> :
                                 "Зарегестрироваться"

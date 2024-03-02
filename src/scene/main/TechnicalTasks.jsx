@@ -28,16 +28,6 @@ const useStyles = makeStyles({
         display: 'flex',
         gap: '10px',
     },
-    returnButton: {
-        marginTop: '20px',
-        background: 'pink',
-        color: 'white',
-        borderRadius: '20px',
-        padding: '10px 20px',
-        '&:hover': {
-            background: 'lightpink',
-        },
-    },
 });
 
 
@@ -130,7 +120,7 @@ function FriendsPage() {
                             value={taskName}
                             onChange={(e) => setTaskName(e.target.value)}
                         />
-                        <Button onClick={addTask} className={classes.returnButton}>
+                        <Button onClick={addTask} style = {{marginLeft: 'auto', marginRight: '0', float: 'right', width: '200px', display: 'block'}}>
                             Добавить
                         </Button>
                     </div>

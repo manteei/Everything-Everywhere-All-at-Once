@@ -4,13 +4,14 @@ import {ALL_PERSON, MESSAGES, MY_FRIENDS, REQ} from "../../service/reducer/const
 import MessageIcon from "@mui/icons-material/Message";
 import {Button} from "@mui/material";
 import {makeStyles} from "@mui/styles";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles({
     listItem: {
         border: '2px solid pink',
         borderRadius: '20px',
         marginBottom: '10px',
-        width: '30%',
+        width: '20%',
         margin: '0 auto',
         padding: '8px',
         overflow: 'hidden', // Добавленное свойство
@@ -71,6 +72,7 @@ const DialoguesPage = () => {
 
     return (
         <div>
+        <div>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <h2>Диалоги</h2>
             </div>
@@ -78,14 +80,20 @@ const DialoguesPage = () => {
                 <div key={dialogue.id } className={classes.listItem}>
                     {dialogue.friend}
                     {dialogue.messages && (
-                        <Button onClick={() => handleMessageFriend(dialogue.friend)} variant="outlined"  style={{marginLeft: 'auto', marginRight: '0', float: 'right' , width : "300px", display: 'block'}}>
-                            <MessageIcon style={{ verticalAlign: 'middle', marginRight: '5px' }}/>
-                            Перейти к диалогу
+                        <Button onClick={() => handleMessageFriend(dialogue.friend)} variant="outlined"  style={{marginLeft: 'auto', marginRight: '0', float: 'right' , width : "200px", display: 'block'}}>
+                            <MessageIcon style={{ verticalAlign: 'middle', marginRight: '10px'}}/>
+                            <div>Перейти к диалогу</div>
                         </Button>
                     )}
                 </div>
+
             ))}
         </div>
+        <Button component={Link} to="/profile"  style={{ width: 200, padding: 8, display: 'block', margin: '0 auto' }}>
+            Вернуться к профилю
+        </Button>
+        </div>
+
     );
 }
 

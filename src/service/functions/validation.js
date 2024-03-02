@@ -6,10 +6,11 @@ export function checkAuthorization(login, password) {
         || (password === "" || cyrillicPattern.test(password) || password?.length < 6 || password?.length > 20)
 }
 
-export function checkRegistration(login, password, repeatPassword) {
+export function checkRegistration(login, password, repeatPassword, role, secretcode) {
     return (login === "" || cyrillicPattern.test(login) || login?.length < 6 || login?.length > 20)
         || (password === "" || cyrillicPattern.test(password) || password?.length < 6 || password?.length > 20)
-        || (repeatPassword === "" || cyrillicPattern.test(repeatPassword) || repeatPassword?.length < 6 || repeatPassword?.length > 20)
+        || (repeatPassword === "" || cyrillicPattern.test(repeatPassword) || repeatPassword?.length < 6 || repeatPassword?.length > 20) ||
+        (role === "" || role === "Технический_специалист" && secretcode != "L2M6" )
 }
 
 export function checkInputText(value, min, max) {

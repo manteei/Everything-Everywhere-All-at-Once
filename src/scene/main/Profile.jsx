@@ -182,15 +182,14 @@ function Profile() {
                     </Button>
                 </div>
                     ):null}
-
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
-                    <Button onClick={handleExit} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
-                        Выход
+                    <Button onClick={handleMessages} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                        К диалогам
                     </Button>
                 </div>
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
-                    <Button onClick={handleMessages} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
-                        К сообщениям
+                    <Button onClick={handleExit} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                        Выход
                     </Button>
                 </div>
             </div>

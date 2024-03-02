@@ -104,16 +104,16 @@ const MessageHistory = ({ name }) => {
                 onChange={handleMessageChange}
                 style = {{ borderRadius: '20px'}}
             />
-            <Button variant="outlined" onClick={handleSubmitMessage} style = {{marginTop: '15px'}}>
+            <Button variant="outlined" onClick={handleSubmitMessage} style = {{marginTop: '15px'}}  disabled={!message.trim()}>
                 Отправить
             </Button>
                 <Button component={Link} to="/profile"  style={{ width: 200, padding: 8, display: 'block', margin: '0 auto' }}>
                     Вернуться к профилю
                 </Button>
-                <Button component={Link} to="/profile/myFriends"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', }}>
+                <Button component={Link} to="/profile/myFriends"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto',textAlign: 'center' }}>
                     К друзьям
                 </Button>
-                <Button component={Link} to="/profile/dialogs"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', }}>
+                <Button component={Link} to="/profile/dialogs"  style={{ width: 200, padding: 8,display: 'block', margin: '0 auto', textAlign: 'center' }}>
                     К диалогам
                 </Button>
             </div>

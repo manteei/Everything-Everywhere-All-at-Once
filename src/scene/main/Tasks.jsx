@@ -95,7 +95,7 @@ function FriendsPage() {
     
     return (
         <div className={classes.friendsContainer}>
-            Ваши задания для получения навыка:
+            <h2>Ваши задания для получения навыка:</h2>
             <List>
                 {tasks.map(task => (
                     <ListItem key={task.name} className={classes.listItem} style={{ marginRight: '40px' }}>

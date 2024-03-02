@@ -99,13 +99,13 @@ function FriendsPage() {
                     <ListItem key={friend.name} className={classes.listItem} style={{ marginRight: '40px' }}>
                         <ListItemText primary={friend.friend} style={{ marginRight: '40px' }} />
                         <div className={classes.buttonGroup}>
-                            <Button onClick={() => handleAddFriend(friend.friend)} variant="outlined"  disabled={addedFriends[friend.friend]}>
-                                <AddIcon style={{ marginRight: '20px' }} />
+                            <Button onClick={() => handleAddFriend(friend.friend)} variant="outlined"  disabled={addedFriends[friend.friend]} style = {{marginLeft: 'auto', marginRight: '0', float: 'right', width: '200px', display: 'block'}}>
+                                <AddIcon style={{ verticalAlign: 'middle', marginRight: '10px'}} />
                                 {addedFriends[friend.friend] ? 'Друг добавлен' : 'Добавить в друзья'}
                             </Button>
-                            <Button onClick={() => handleMessageFriend(friend.friend)} variant="outlined">
-                                <MessageIcon  style={{ marginRight: '20px' }}/>
-                                Написать сообщение
+                            <Button onClick={() => handleMessageFriend(friend.friend)} variant="outlined" style = {{marginLeft: 'auto', marginRight: '0', float: 'right', width: '200px', display: 'block'}}>
+                                <MessageIcon  style={{ verticalAlign: 'middle', marginRight: '10px'}}/>
+                                Перейти к диалогу
                             </Button>
                         </div>
                     </ListItem>

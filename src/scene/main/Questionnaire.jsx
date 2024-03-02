@@ -22,20 +22,6 @@ const useStyles = makeStyles({
         borderRadius: '20px',
         marginBottom: '10px',
     },
-    buttonGroup: {
-        display: 'flex',
-        gap: '10px',
-    },
-    returnButton: {
-        marginTop: '20px',
-        background: 'pink',
-        color: 'white',
-        borderRadius: '20px',
-        padding: '10px 20px',
-        '&:hover': {
-            background: 'lightpink',
-        },
-    },
 });
 
 
@@ -105,7 +91,7 @@ function FriendsPage() {
 
     return (
         <div className={classes.friendsContainer}>
-            Ваши навыки:
+            <h2>Ваши навыки:</h2>
             {!editMode && (
                 <Button onClick={handleEditClick} className={classes.editButton}>
                     Изменить
@@ -114,7 +100,7 @@ function FriendsPage() {
             <List>
                 {tasks.map((task, index) => (
                     <ListItem key={task.title} className={classes.listItem}>
-                        <ListItemText primary={task.title} />
+                        <ListItemText primary={task.title} style ={{marginRight: "20px"}} />
                         {editMode ? (
                             <TextField
                                 value={editedTasks[index].mastery_percentage}

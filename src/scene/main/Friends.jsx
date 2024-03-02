@@ -102,12 +102,12 @@ function FriendsPage() {
                         <ListItemText primary={friend.friend} style={{ marginRight: '40px' }}/>
 
                         <div className={classes.buttonGroup}>
-                            <Button onClick={() => handleRemoveFriend(friend.friend)} variant="outlined" disabled={deletedFriends[friend.friend]}>
-                                <DeleteIcon style={{ marginRight: '20px' }} />
+                            <Button onClick={() => handleRemoveFriend(friend.friend)} variant="outlined" disabled={deletedFriends[friend.friend]} style = {{marginLeft: 'auto', marginRight: '0', float: 'right', width: '200px', display: 'block'}}>
+                                <DeleteIcon style={{ verticalAlign: 'middle', marginRight: '10px'}} />
                                 {deletedFriends[friend.friend] ? 'Друг удален' : 'Удалить из друзей'}
                             </Button>
-                            <Button onClick={() => handleMessageFriend(friend.friend)} variant="outlined">
-                                <MessageIcon  style={{ marginRight: '20px' }}/>
+                            <Button onClick={() => handleMessageFriend(friend.friend)} variant="outlined" style = {{marginLeft: 'auto', marginRight: '0', float: 'right', width: '200px', display: 'block'}}>
+                                <MessageIcon style={{ verticalAlign: 'middle', marginRight: '10px'}}/>
                                 Написать сообщение
                             </Button>
                         </div>
