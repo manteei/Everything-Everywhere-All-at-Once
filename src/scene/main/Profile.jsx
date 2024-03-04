@@ -4,6 +4,7 @@ import axios from 'axios';
 import {MY_FRIENDS, PROF} from '../../service/reducer/const';
 import {Typography, IconButton, TextField, Link, Button} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles({
     friendsContainer: {
@@ -47,11 +48,12 @@ function Profile() {
     const [userData, setUserData] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [newName, setNewName] = useState('');
+    const navigate = useNavigate()
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = '/login'; // Перенаправление на страницу входа, если токен отсутствует
+            navigate('/login'); // Перенаправление на страницу входа, если токен отсутствует
         } else {
             const headers = {
                 Authorization: `Bearer ${token}`,
@@ -75,26 +77,28 @@ function Profile() {
         setNewName(event.target.value);
     };
 
-    const handleNavigateToFriends = () => {
-        window.location.href = '/profile/myFriends';
-    };
-    const handleExit = () => {
+    const handleNavigateToFriends = () => navigate('/profile/myFriends')
+    const handleExit = () =>{
+        navigate('/login')
         localStorage.removeItem('token');
-        window.location.href = '/login';
     };
 
     const handleNavigateToOrders = () => {
-        window.location.href = '/profile/incidents';
+        navigate('/profile/incidents')
     };
     const handleGetTask = () => {
-        window.location.href = '/profile/moving/task';
+        navigate('/profile/moving/task')
     };
     const handleNavigateToQuestionnaire = () =>{
-        window.location.href = '/profile/questionnaire'
+        navigate('/profile/questionnaire')
+    };
+
+    const handleNavigateToModel = () => {
+        navigate('/profile/skillModel')
     };
 
     const handleMessages = () =>{
-        window.location.href = '/profile/dialogs'
+        navigate('/profile/dialogs')
     };
     const handleSaveClick = () => {
         const token = localStorage.getItem('token');
@@ -182,6 +186,15 @@ function Profile() {
                     </Button>
                 </div>
                     ):null}
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop:'50px'}}>
+                {localStorage.getItem('role') === "Герой" ?(
+                    <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
+                        <Button onClick={handleNavigateToModel} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
+                            К модели навыков
+                        </Button>
+                    </div>
+                ):null}
                 <div className={classes.listItem} style = {{marginRight:'20px', marginLeft:'20px'}}>
                     <Button onClick={handleMessages} className={classes.returnButton} style={{ width: 200, padding: 8 }}>
                         К диалогам

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ALL_PERSON, MY_FRIENDS, RESULT, TASKS} from '../../service/reducer/const';
 import { Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -42,6 +42,8 @@ const useStyles = makeStyles({
 
 function FriendsPage() {
     const classes = useStyles();
+    const navigate = useNavigate();
+
     const [tasks, setTasks] = useState([]);
 
     const token = localStorage.getItem('token');
@@ -50,7 +52,7 @@ function FriendsPage() {
     };
     useEffect(() => {
         if (!token) {
-            window.location.href = '/login';
+            navigate('/login');
         }}, []);
 
     useEffect(() => {
@@ -71,7 +73,7 @@ function FriendsPage() {
 
         axios.post(RESULT, { name: "Done" }, { headers})
             .then(() => {
-                window.location.href = '/profile';
+                navigate('/profile');
             })
             .catch(error => {
                 console.error('Error updating user data:', error);
@@ -85,7 +87,7 @@ function FriendsPage() {
 
         axios.post(RESULT, { name: "NotDone" }, { headers})
             .then(() => {
-                window.location.href = '/profile';
+                navigate('/profile');
             })
             .catch(error => {
                 console.error('Error updating user data:', error);

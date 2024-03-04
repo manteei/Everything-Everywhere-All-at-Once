@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ADD_INC, ALL_PERSON, MONSTERS, UNIVERSALS} from '../../service/reducer/const';
 import {Button, MenuItem, Select} from '@mui/material';
 import TextField from "@mui/material/TextField";
@@ -40,6 +40,7 @@ const useStyles = makeStyles({
 
 function FriendsPage() {
     const classes = useStyles();
+    const navigate = useNavigate()
 
     const [monster, setMonster] = useState('');
     const [universe, setUniverse] = useState('');
@@ -55,7 +56,7 @@ function FriendsPage() {
     };
     useEffect(() => {
         if (!token) {
-            window.location.href = '/login';
+            navigate('/login');
         }}, []);
 
     useEffect(() => {

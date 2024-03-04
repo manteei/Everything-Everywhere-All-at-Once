@@ -4,7 +4,7 @@ import {ALL_PERSON, MESSAGES, MY_FRIENDS, REQ} from "../../service/reducer/const
 import MessageIcon from "@mui/icons-material/Message";
 import {Button} from "@mui/material";
 import {makeStyles} from "@mui/styles";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles({
     listItem: {
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
 const DialoguesPage = () => {
     const [dialogues, setDialogues] = useState([]);
     const classes = useStyles();
+    const navigate = useNavigate()
     const token = localStorage.getItem('token');
     const headers = {
         Authorization: `Bearer ${token}`,
@@ -29,7 +30,7 @@ const DialoguesPage = () => {
 
     const handleMessageFriend = (friendName) => {
         localStorage.setItem('selectedFriend', friendName);
-        window.location.href = '/profile/messages';
+        navigate('/profile/messages');
     };
 
     useEffect(() => {

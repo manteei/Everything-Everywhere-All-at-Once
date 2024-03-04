@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ALL_PERSON, INC, MY_FRIENDS, PROF, RESULT, TASKS} from '../../service/reducer/const';
 import {Typography, List, ListItem, ListItemText, Button, Select, MenuItem} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -43,6 +43,8 @@ const useStyles = makeStyles({
 
 function FriendsPage() {
     const classes = useStyles();
+    const navigate = useNavigate()
+
     const [tasks, setTasks] = useState([]);
     const [selectedTaskId, setSelectedTaskId] = useState(null);
     const [coordinatorNames, setCoordinatorNames] = useState({});
@@ -69,7 +71,7 @@ function FriendsPage() {
 
     useEffect(() => {
         if (!token) {
-            window.location.href = '/login';
+            navigate('/login');
         }
     }, [token]);
 

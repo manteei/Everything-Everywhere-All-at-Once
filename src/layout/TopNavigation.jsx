@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     },
     variant: {
         marginLeft:8,
+        marginRight: '20px',
         display: "flex",
         alignItems: 'center',
         height: "60px",
@@ -36,10 +37,15 @@ function TopNavigation() {
     return (
         <div className={classes.header}>
             <div className={classes.headerContainer}>
-                <div style={{display: "flex", alignItems: 'center', height: "60px"}}>
-                    <img style={{width: 50, height: 50}} src={logo}/>
-                    <div className={classes.variant}>
-                        <Header label={"Everything Everywhere All at Once"}/>
+                <div style={{display: "flex", height: "60px"}}>
+                    <img style={{width: 150, height: 50}} src={logo}/>
+                    <div className={classes.variant} style={{ display: 'flex' }}>
+                        <div style={{ whiteSpace: 'nowrap' }}>
+                            <Header label={"Everything Everywhere All at Once"} style = {{marginRight: '40px'}} />
+                        </div>
+                    </div>
+                    <div style={{ whiteSpace: 'nowrap',  textAlign: 'right', marginLeft: '800px' }}>
+                        <Header label={"Телефон горячей линии +7-800-555-35-35"} />
                     </div>
                 </div>
             </div>

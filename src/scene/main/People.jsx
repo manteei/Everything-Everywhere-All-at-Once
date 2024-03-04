@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {ALL_PERSON, MY_FRIENDS} from '../../service/reducer/const';
 import { Typography, List, ListItem, ListItemText, Button } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
@@ -43,6 +43,7 @@ const useStyles = makeStyles({
 function FriendsPage() {
     const classes = useStyles();
     const [friends, setFriends] = useState([]);
+    const navigate = useNavigate()
     const [addedFriends, setAddedFriends] = useState({});
 
     const token = localStorage.getItem('token');
@@ -51,7 +52,7 @@ function FriendsPage() {
     };
     useEffect(() => {
         if (!token) {
-            window.location.href = '/login';
+            navigate('/login');
         }}, []);
 
     useEffect(() => {
@@ -84,7 +85,7 @@ function FriendsPage() {
 
     const handleMessageFriend = (friendName) => {
         localStorage.setItem('selectedFriend', friendName);
-        window.location.href = '/profile/messages';
+        navigate('/profile/messages');
     };
 
     return (

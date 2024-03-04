@@ -15,6 +15,8 @@ import OrderBoard from "../../scene/main/OrderBoard";
 import TechnicalIncidents from "../../scene/main/TechnicalIncidents";
 import Messages from "../../scene/main/Messages";
 import Dialogs from "../../scene/main/Dialogs";
+import SkillModel from "../../scene/main/SkillModel";
+
 function Router() {
     return (
         <BrowserRouter >
@@ -31,6 +33,7 @@ function Router() {
                 <Route path="/work/incidents" element={<Orders/>}/>
                 <Route path="/profile/questionnaire" element={<Questionnaire/>}/>
                 <Route path="/profile/requests" element={<Requests/>}/>
+                <Route path="/profile/skillModel" element={<SkillModel/>}/>
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/profile/dialogs" element={<Dialogs/>}/>
                 <Route path="/profile/messages" element={<Messages/>}/>

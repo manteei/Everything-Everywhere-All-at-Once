@@ -4,6 +4,7 @@ import axios from 'axios';
 import {MY_FRIENDS, PROF} from '../../service/reducer/const';
 import {Typography, IconButton, TextField, Link, Button} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import {useNavigate} from "react-router-dom";
 
 const useStyles = makeStyles({
     friendsContainer: {
@@ -44,6 +45,8 @@ const useStyles = makeStyles({
 
 function Profile() {
     const classes = useStyles();
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState(null);
     const [editMode, setEditMode] = useState(false);
     const [newName, setNewName] = useState('');
@@ -51,7 +54,7 @@ function Profile() {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = '/login'; // Перенаправление на страницу входа, если токен отсутствует
+            navigate('/login');
         } else {
             const headers = {
                 Authorization: `Bearer ${token}`,
@@ -68,18 +71,18 @@ function Profile() {
 
 
     const handleNavigateToFriends = () => {
-        window.location.href = '/work/tasks'; // Перенаправление на страницу друзей
+        navigate('/work/tasks'); // Перенаправление на страницу друзей
     };
     const handleExit = () => {
         localStorage.removeItem('token');
-        window.location.href = '/login';
+        navigate('/login');
     };
     const handleToIncidents = () => {
-        window.location.href = 'work/incidents/addIncidents'
+        navigate('/work/incidents/addIncidents')
     };
 
     const handleNavigateToIncidents =() => {
-        window.location.href = 'work/incidents'
+        navigate('/work/incidents')
     };
 
     return (

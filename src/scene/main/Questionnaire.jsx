@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {PROF, QUESTIONNAIRE} from '../../service/reducer/const';
 import {List, ListItem, ListItemText, Button } from '@mui/material';
 import TextField from "@mui/material/TextField";
@@ -30,7 +30,7 @@ function FriendsPage() {
     const [tasks, setTasks] = useState([]);
     const [editMode, setEditMode] = useState(false);
     const [editedTasks, setEditedTasks] = useState([]);
-
+    const navigate = useNavigate()
     const token = localStorage.getItem('token');
     const headers = {
         Authorization: `Bearer ${token}`,
@@ -38,7 +38,7 @@ function FriendsPage() {
 
     useEffect(() => {
         if (!token) {
-            window.location.href = '/login';
+            navigate('/login');
         }
     }, [token]);
 

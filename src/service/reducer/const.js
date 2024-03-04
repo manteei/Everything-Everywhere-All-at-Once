@@ -30,6 +30,8 @@ export const RESULT = PROF + "/moving/result"
 
 export const QUESTIONNAIRE = PROF + "/questionnaire"
 export const REQ = PROF + "/requests"
+
+export const MODEL = PROF + "/skillModel"
 export const SUCCESS = "SUCCESS "
 export const FAILED = "FAILED "
 export const REQUEST = "REQUEST "
